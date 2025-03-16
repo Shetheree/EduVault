@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduVault - Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+        }
+        .sidebar {
+            width: 250px;
+            background: #1e1e2d;
+            color: white;
+            height: 100vh;
+            padding: 20px;
+            position: fixed;
+        }
+        .sidebar h2 {
+            text-align: center;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar ul li {
+            padding: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .sidebar ul li:hover {
+            background: #28a745;
+        }
+        .main-content {
+            margin-left: 300px;
+            padding: 20px;
+            flex-grow: 1;
+            background: #f4f4f4;
+            min-height: 100vh;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .stat-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>EduVault</h2>
+        <ul>
+            <li>Dashboard</li>
+            <li>Student Records</li>
+            <li>Faculty Data</li>
+            <li>Courses</li>
+            <li>Settings</li>
+            <li>Logout</li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <h1>Dashboard</h1>
+        <div class="stats">
+            <div class="stat-box">
+                <h3>Students</h3>
+                <p>1,200</p>
+            </div>
+            <div class="stat-box">
+                <h3>Faculty</h3>
+                <p>150</p>
+            </div>
+            <div class="stat-box">
+                <h3>Courses</h3>
+                <p>50</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
