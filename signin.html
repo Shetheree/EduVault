@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduVault - Sign In & Sign Up</title>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         body {
@@ -17,14 +19,36 @@
             align-items: center;
             height: 100vh;
         }
+        .flip-container {
+            position: relative;
+            width: 90%;
+            max-width: 350px;
+            height: auto;
+            perspective: 1000px;
+            margin-top: -280px; /* Moves the content box upwards */
+        }
         .container {
             background: rgba(0, 0, 0, 0.8);
             padding: 20px;
             border-radius: 8px;
             text-align: center;
-            width: 90%;
-            max-width: 350px;
+            width: 100%;
             box-sizing: border-box;
+            position: absolute;
+            backface-visibility: hidden;
+            transition: transform 0.6s;
+        }
+        .flipped .signin {
+            transform: rotateY(180deg);
+        }
+        .flipped .signup {
+            transform: rotateY(0deg);
+        }
+        .signin {
+            transform: rotateY(0deg);
+        }
+        .signup {
+            transform: rotateY(-180deg);
         }
         input, select {
             width: 100%;
@@ -56,52 +80,49 @@
             display: block;
             text-decoration: underline;
         }
-        
         @media (max-width: 600px) {
             body {
                 flex-direction: column;
                 padding: 20px;
             }
-            .container {
+            .flip-container {
                 width: 100%;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container" id="signin-container">
-        <h2>Sign In</h2>
-        <form>
-            <input type="email" placeholder="Email" required>
-            <input type="password" placeholder="Password" required>
-            <button class="btn" type="submit">Sign In</button>
-        </form>
-        <span class="toggle" onclick="toggleForms()">Don't have an account? Sign Up</span>
-    </div>
-    
-    <div class="container" id="signup-container" style="display: none;">
-        <h2>Sign Up</h2>
-        <form>
-            <input type="text" placeholder="Username" required>
-            <input type="email" placeholder="Email" required>
-            <input type="password" placeholder="Password" required>
-            <select required>
-                <option value="" disabled selected>Select College</option>
-                <option value="College A">NMAMIT-Nitte</option>
-                <option value="College B">NUCSER-Derlakatte</option>
-                <option value="College C">NMIT-B'lore</option>
-            </select>
-            <button class="btn" type="submit">Sign Up</button>
-        </form>
-        <span class="toggle" onclick="toggleForms()">Already have an account? Sign In</span>
+    <div class="flip-container" id="flip-container">
+        <div class="container signin" id="signin-container">
+            <h2>Sign In</h2>
+            <form onsubmit="signIn(event)">
+                <input type="email" id="signin-email" placeholder="Email" required>
+                <input type="password" id="signin-password" placeholder="Password" required minlength="6">
+                <button class="btn" type="submit">Sign In</button>
+            </form>
+            <span class="toggle" onclick="toggleForms()">Don't have an account? Sign Up</span>
+        </div>
+        <div class="container signup" id="signup-container">
+            <h2>Sign Up</h2>
+            <form onsubmit="signUp(event)">
+                <input type="text" id="signup-name" placeholder="Username" required pattern="[A-Za-z0-9]{3,}" title="Username must be at least 3 characters and contain only letters and numbers">
+                <input type="email" id="signup-email" placeholder="Email" required>
+                <input type="password" id="signup-password" placeholder="Password" required minlength="6">
+                <select id="signup-college" required>
+                    <option value="" disabled selected>Select College</option>
+                    <option value="College A">NMAMIT-Nitte</option>
+                    <option value="College B">NUCSER-Derlakatte</option>
+                    <option value="College C">NMIT-B'lore</option>
+                </select>
+                <button class="btn" type="submit">Sign Up</button>
+            </form>
+            <span class="toggle" onclick="toggleForms()">Already have an account? Sign In</span>
+        </div>
     </div>
     
     <script>
         function toggleForms() {
-            document.getElementById('signin-container').style.display = 
-                document.getElementById('signin-container').style.display === 'none' ? 'block' : 'none';
-            document.getElementById('signup-container').style.display = 
-                document.getElementById('signup-container').style.display === 'none' ? 'block' : 'none';
+            document.getElementById('flip-container').classList.toggle('flipped');
         }
     </script>
 </body>
