@@ -22,15 +22,18 @@
             padding: 20px;
             border-radius: 8px;
             text-align: center;
-            width: 350px;
+            width: 90%;
+            max-width: 350px;
+            box-sizing: border-box;
         }
         input, select {
-            width: 90%;
+            width: 100%;
             padding: 10px;
-            margin: 10px auto;
+            margin: 10px 0;
             border-radius: 5px;
             border: none;
             display: block;
+            box-sizing: border-box;
         }
         .btn {
             background: #28a745;
@@ -39,8 +42,9 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            width: 90%;
+            width: 100%;
             margin-top: 15px;
+            box-sizing: border-box;
         }
         .btn:hover {
             background: #1e7e34;
@@ -51,6 +55,16 @@
             margin-top: 10px;
             display: block;
             text-decoration: underline;
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                flex-direction: column;
+                padding: 20px;
+            }
+            .container {
+                width: 100%;
+            }
         }
     </style>
 </head>
